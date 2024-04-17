@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        font-family: system-ui;
+        color: white;
+    }
+body{
+    margin: 0px;
+    background: #222222;
+}
+.title{
+    background: linear-gradient(180deg, #525252, #232323);
+    color: white;
+    font-family: system-ui;
+    width: 70vw;
+    position: relative;
+    left: 13vw;
+    margin-top: 5vw;
+    padding: 1vw;
+    border-radius: 15px;
+}
+h1{
+    margin-top: 0px;
+}
+.contentRef{
+    display: flex;
+    justify-content: space-evenly;
+}
+a{
+	color: wheat;
+    text-decoration: none;
+}
+main{
+    width: 70vw;
+    margin-left: 15vw;
+    margin-top: 5vw;
+    position: relative;
+}
+.refresh{
+    background: transparent;
+    border: 0px;
+    font-size: 30px;
+    position: sticky;
+    margin-left: 70vw;
+    top: 18px;
+    z-index: 1;
+}
+.refresh:hover{
+    text-shadow: 0px 0px 20px cadetblue;
+}
+summary{
+    background: linear-gradient(0deg, #242424, #434343);
+    padding: 5px;
+    border-radius: 20px;
+    margin: 5px;
+    color: white;
+}
+summary:hover{
+    background: linear-gradient(0deg, #353535, #656565) !important;
+}
+article{
+    background: radial-gradient(#525252, #232323);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    height: 150px;
+    border: 2px solid grey;
+    position: relative;
+    margin: 10px;
+}
+article p{
+    margin: 0px;
+}
+.titleChapter{
+    color: white;
+    height: 50%;
+    margin: 0px;
+}
+.contentPrice{
+    position: absolute;
+    right: 0px;
+    padding: 10px;
+    height: 50px;
+    width: 100px;
+    top: 30%;
+    text-align: center;
+}
+.details{
+    position: absolute;
+    bottom: 5%;
+}
+.buttonRes{
+    position: absolute;
+    right: 30px;
+    bottom: 10px;
+    color: black;
+    border-radius: 5px;
+}
+.buttonRes:hover{
+    background: #c2ffcd;
+}
+.buttonRes:disabled{
+    background:#575757;
+    border: 2px solid #232323;
+}
+.basicText{
+    color: grey;
+}
+</style>
+<body>
+    <header class="title">
+        <h1>Capitulos de "The Mandalorian"</h1>
+        <div class="contentRef">
+            <a href="#DetTemp1">Temporada 1</a>
+            <a href="#DetTemp2">Temporada 2</a>
+            <a href="#DetTemp3">Temporada 3</a>
+        </div>
+    </header>
+    <main>
+        <button class="refresh" onclick="loadChapters()">🔁</button>
+        <section>
+            <details id="DetTemp1">
+                <summary>Temporada 1</summary>
+                <div id="contentTemp1">
+                    <article id="Chap1" class="chapterArticle">
+                        <header><h3 class="titleChapter">Capítulo 1</h3></header> 
+                        <div class="contentPrice">
+                            <p class="basicText">precio:</p>
+                            <p class="price">$1000</p>
+                        </div>
+                        <div class="details">
+                            <span style="display: flex;"><p class="basicText" style="padding-right: 5px;">estado:</p><p class="state"> disponible</p></span>
+                            <span style="display: flex;"><p class="basicText" style="padding-right: 5px;">tiempo:</p><p class="time"> 929394894828</p></span>
+                        </div>
+                        <button class="buttonRes" onclick="reserve('Chap1');">Reservar</button>
+                     </article>
+                     <article id="Chap2" class="chapterArticle">
+                         <header><h3>Capítulo 2</h3></header> 
+                         <p class="price">precio:</p>
+                         <p class="state">estado:</p>
+                         <p class="time">tiempo:</p>
+                        <button class="buttonRes" onclick="reserve('Chap2');">Reservar</button>
+                     </article>
+                     <article id="Chap3" class="chapterArticle">
+                         <header><h3>Capítulo 3</h3></header> 
+                        <button onclick="reserve('Chap3');">Reservar</button>
+                     </article>
+                     <article id="Chap4" class="chapterArticle">
+                         <header><h3>Capítulo 4</h3></header> 
+                        <button onclick="reserve('Chap4');">Reservar</button>
+                     </article>
+                     <article id="Chap5" class="chapterArticle">
+                         <header><h3>Capítulo 5</h3></header> 
+                        <button onclick="reserve('Chap5');">Reservar</button>
+                     </article>
+                     <article id="Chap6" class="chapterArticle">
+                         <header><h3>Capítulo 6</h3></header> 
+                        <button onclick="reserve('Chap6');">Reservar</button>
+                     </article>
+                     <article id="Chap7" class="chapterArticle">
+                         <header><h3>Capítulo 7</h3></header> 
+                        <button onclick="reserve('Chap7');">Reservar</button>
+                     </article>
+                     <article id="Chap8" class="chapterArticle">
+                         <header><h3>Capítulo 8</h3></header> 
+                        <button onclick="reserve('Chap8');">Reservar</button>
+                     </article>
+                </div>
+            </details>
+            <details id="DetTemp2">
+                <summary>Temporada 2</summary>
+                <div id="contentTemp2">
+                    <article id="Chap9">
+                        <header><h3>Capítulo 9</h3></header> 
+                        <button onclick="reserve('Chap9');">Reservar</button>
+                    </article>
+                    <article id="Chap10">
+                        <header><h3>Capítulo 10</h3></header> 
+                        <button onclick="reserve('Chap10');">Reservar</button>
+                    </article>
+                    <article id="Chap11">
+                        <header><h3>Capítulo 11</h3></header> 
+                        <button onclick="reserve('Chap11');">Reservar</button>
+                    </article>
+                    <article id="Chap12">
+                        <header><h3>Capítulo 12</h3></header> 
+                        <button onclick="reserve('Chap12');">Reservar</button>
+                    </article>
+                    <article id="Chap13">
+                        <header><h3>Capítulo 13</h3></header> 
+                        <button onclick="reserve('Chap13');">Reservar</button>
+                    </article>
+                    <article id="Chap14">
+                        <header><h3>Capítulo 14</h3></header> 
+                        <button onclick="reserve('Chap14');">Reservar</button>
+                    </article>
+                    <article id="Chap15">
+                        <header><h3>Capítulo 15</h3></header> 
+                        <button onclick="reserve('Chap15');">Reservar</button>
+                    </article>
+                    <article id="Chap16">
+                        <header><h3>Capítulo 16</h3></header> 
+                        <button onclick="reserve('Chap16');">Reservar</button>
+                    </article>
+                </div>
+            </details>
+            <details id="DetTemp3">
+                <summary>Temporada 3</summary>
+                <div id="contentTemp3">
+                    <article id="Chap17">
+                        <header><h3>Capítulo 17</h3></header> 
+                       <button onclick="reserve('Chap17');">Reservar</button>
+                    </article>
+                    <article id="Chap18">
+                        <header><h3>Capítulo 18</h3></header> 
+                       <button onclick="reserve('Chap18');">Reservar</button>
+                    </article>
+                    <article id="Chap19">
+                        <header><h3>Capítulo 19</h3></header> 
+                       <button onclick="reserve('Chap19');">Reservar</button>
+                    </article>
+                    <article id="Chap20">
+                        <header><h3>Capítulo 20</h3></header> 
+                       <button onclick="reserve('Chap20');">Reservar</button>
+                    </article>
+                    <article id="Chap21">
+                        <header><h3>Capítulo 21</h3></header> 
+                       <button onclick="reserve('Chap21');">Reservar</button>
+                    </article>
+                    <article id="Chap22">
+                        <header><h3>Capítulo 22</h3></header> 
+                       <button onclick="reserve('Chap22');">Reservar</button>
+                    </article>
+                    <article id="Chap23">
+                        <header><h3>Capítulo 23</h3></header> 
+                       <button onclick="reserve('Chap23');">Reservar</button>
+                    </article>
+                    <article id="Chap24">
+                        <header><h3>Capítulo 24</h3></header> 
+                       <button onclick="reserve('Chap24');">Reservar</button>
+                    </article>
+                </div>
+            </details>
+        </section>
+    </main>
+</body>
+</html>
+
+
+<script>
+    
+document.addEventListener('DOMContentLoaded', function() {
+    loadChapters();    
+})
+
+function loadChapters(){
+    fetch(`http://localhost:5000/capitulos`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            let temp1 = "";
+            let temp2 = "";
+            let temp3 = "";
+            let dataReversed = data.reverse();
+            dataReversed.forEach(element => {
+                switch (element[2]){
+                    case "Temp1":
+                        temp1 = temp1
+                        +`<article id="${element[0]}" class="chapterArticle">`
+                        +    `<header><h3 class="titleChapter">${element[1]}</h3><p>${element[0].replace("Cap","Capítulo ")}</p></header> `
+                        +    `<div class="contentPrice">`
+                        +        `<p class="basicText">precio:</p>`
+                        +        `<p class="price">${element[3]}</p>`
+                        +    `</div>`
+                        +    `<div class="details">`
+                        +        `<span style="display: flex;"><p class="basicText" style="padding-right: 5px;">estado:</p><p class="state">${element[4].split(":")[0]}</p></span>`;
+                        if(!(element[4].split(":")[0]=="disponible")){
+                            temp1 = temp1 + `<span style="display: flex;"><p class="basicText" style="padding-right: 5px;">tiempo:</p><p class="time">${translateTime(element[5])}</p></span>`    
+                        }
+                        temp1 = temp1
+                        +    `</div>`;
+                        switch (element[4].split(":")[0]){
+                            case "disponible":
+                                temp1 = temp1
+                                +    `<button class="buttonRes" onclick="reserve('${element[0]}');">Reservar</button>`
+                                break;
+                            case "reservado":
+                                temp1 = temp1
+                                +    `<button class="buttonRes" onclick="rent('${element[0]}');">Alquilar ⚠️</button>`
+                                break;
+                            case "alquilado":
+                                temp1 = temp1
+                                +    `<button class="buttonRes" disabled >Reservar 🚫</button>`
+                                break;
+                        }
+                        temp1 = temp1
+                        +`</article>`;
+                        break;
+                    case "Temp2":
+                        temp2 = temp2
+                        +`<article id="${element[0]}" class="chapterArticle">`
+                        +    `<header><h3 class="titleChapter">${element[1]}</h3><p>${element[0].replace("Cap","Capítulo ")}</p></header> `
+                        +    `<div class="contentPrice">`
+                        +        `<p class="basicText">precio:</p>`
+                        +        `<p class="price">${element[3]}</p>`
+                        +    `</div>`
+                        +    `<div class="details">`
+                        +        `<span style="display: flex;"><p class="basicText" style="padding-right: 5px;">estado:</p><p class="state">${element[4]}</p></span>`;
+                        if(!(element[4].split(":")[0]=="disponible")){
+                            temp2 = temp2 + `<span style="display: flex;"><p class="basicText" style="padding-right: 5px;">tiempo:</p><p class="time">${translateTime(element[5])}</p></span>`    
+                        }
+                        temp2 = temp2
+                        +    `</div>`;
+                        switch (element[4].split(":")[0]){
+                            case "disponible":
+                                temp2 = temp2
+                                +    `<button class="buttonRes" onclick="reserve('${element[0]}');">Reservar</button>`
+                                break;
+                            case "reservado":
+                                temp2 = temp2
+                                +    `<button class="buttonRes" onclick="rent('${element[0]}');">Alquilar ⚠️</button>`
+                                break;
+                            case "alquilado":
+                                temp2 = temp2
+                                +    `<button class="buttonRes" disabled >Reservar 🚫</button>`
+                                break;
+                        }
+                        temp2 = temp2
+                        +`</article>`;
+                        break;
+                    case "Temp3":
+                        temp3 = temp3
+                        +`<article id="${element[0]}" class="chapterArticle">`
+                        +    `<header><h3 class="titleChapter">${element[1]}</h3><p>${element[0].replace("Cap","Capítulo ")}</p></header> `
+                        +    `<div class="contentPrice">`
+                        +        `<p class="basicText">precio:</p>`
+                        +        `<p class="price">${element[3]}</p>`
+                        +    `</div>`
+                        +    `<div class="details">`
+                        +        `<span style="display: flex;"><p class="basicText" style="padding-right: 5px;">estado:</p><p class="state">${element[4]}</p></span>`;
+                        if(!(element[4].split(":")[0]=="disponible")){
+                            temp3 = temp3 + `<span style="display: flex;"><p class="basicText" style="padding-right: 5px;">tiempo:</p><p class="time">${translateTime(element[5])}</p></span>`    
+                        }
+                        temp3 = temp3
+                        +    `</div>`;
+                        switch (element[4].split(":")[0]){
+                            case "disponible":
+                                temp3 = temp3
+                                +    `<button class="buttonRes" onclick="reserve('${element[0]}');">Reservar</button>`;
+                                break;
+                            case "reservado":
+                                temp3 = temp3
+                                +    `<button class="buttonRes" onclick="rent('${element[0]}');">Alquilar ⚠️</button>`;
+                                break;
+                            case "alquilado":
+                                temp3 = temp3
+                                +    `<button class="buttonRes" disabled >Reservar 🚫</button>`;
+                                break;
+                        }
+                        temp3 = temp3
+                        +`</article>`;
+                        break;
+                }
+                document.getElementById("contentTemp1").innerHTML = temp1;
+                document.getElementById("contentTemp2").innerHTML = temp2;
+                document.getElementById("contentTemp3").innerHTML = temp3;
+                console.log(element);
+            });
+        }).catch(error =>{
+            console.error(`ERROR:${error}`);
+            document.getElementById("contentTemp1").innerHTML = "";
+            document.getElementById("contentTemp2").innerHTML = "";
+            document.getElementById("contentTemp3").innerHTML = "";
+        });
+}
+
+function translateTime(time){
+   let H = Math.floor(time / 3600000)
+   let M = Math.floor((time % 3600000)/60000)
+   let S = Math.floor(((time % 3600000)%60000) / 1000)
+   console.log(H.toString().length);
+   console.log(M.toString().length);
+   console.log(S.toString().length);
+   return `${H < 10? "0"+H : H}:${M < 10? "0"+M : M}:${S < 10? "0"+S : S}`;
+}
+
+function reserve(chapter){
+    let obj = {
+            "capitulo": chapter,
+        }
+    fetch(`http://localhost:5000/reservar`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(response => {
+            if(response.status >= 200 && response.status < 300)
+                console.log("OK")
+            if(response.status >= 400)
+                console.error("ERROR");
+        }).then(response => {
+            loadChapters();
+        })
+}
+
+
+function rent(chapter, price){
+    let obj = {
+            "capitulo": chapter,
+            "precio": price
+        }
+    fetch(`http://localhost:5000/alquilar`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(response => {
+            if(response.status >= 200 && response.status < 300)
+                console.log("OK")
+            if(response.status >= 400)
+                console.error("ERROR");
+        }).then(response => {
+            loadChapters();
+        })
+}
+</script>

@@ -1,0 +1,21 @@
+version: '3.8'  # Versión de Docker Compose que se utilizará
+
+services:  # Define los servicios de contenedores que se ejecutarán
+
+  db-redis:  # Nombre del servicio (puede ser cualquier nombre que desees)
+    container_name: redis_db_test_node
+    image: redis:alpine  # Imagen de Docker que se utilizará para este servicio
+    ports: 
+    - "6379:6379"
+
+  web-app:  # Otro servicio llamado "web"
+    image: node:18.20.1-alpine
+    container_name: prueba_node
+    build: ./api  # Directorio que contiene el Dockerfile para construir la imagen
+    ports:  # Mapeo de puertos entre el host y el contenedor
+      - "5000:5000"  # Mapeo del puerto 8000 del host al puerto 8000 del contenedor
+    volumes:  # Volumen para montar un directorio del host dentro del contenedor
+      - ./api:/api  # Montar el directorio "app" del host en "/code" dentro del contenedor
+    command: sh -c "node --watch TheMandalorianApi.mjs"
+    depends_on:  # Dependencias del servicio web
+      - db-redis  # Indicar que este servicio depende del servicio "db"

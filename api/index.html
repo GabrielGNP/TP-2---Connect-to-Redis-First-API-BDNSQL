@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="display: flex;">
+    <nav style="flex:1">
+        <details>
+            <summary>listar personajes</summary>
+            <ul>
+                <li><button id="LPCap1" onclick="listP(1)">capítulo 1</button></li>
+                <li><button id="LPCap2" onclick="listP(2)">capítulo 2</button></li>
+                <li><button id="LPCap3" onclick="listP(3)">capítulo 3</button></li>
+                <li><button id="LPCap4" onclick="listP(4)">capítulo 4</button></li>
+                <li><button id="LPCap5" onclick="listP(5)">capítulo 5</button></li>
+                <li><button id="LPCap6" onclick="listP(6)">capítulo 6</button></li>
+                <li><button id="LPCap7" onclick="listP(7)">capítulo 7</button></li>
+                <li><button id="LPCap8" onclick="listP(8)">capítulo 8</button></li>
+                <li><button id="LPCap9" onclick="listP(9)">capítulo 9</button></li>
+            </ul>
+        </details>
+        <details>
+            <summary>agregar personaje</summary>
+            <ul>
+                <li><button id="APCap1" onclick="addP(1)">capítulo 1</button></li>
+                <li><button id="APCap2" onclick="addP(2)">capítulo 2</button></li>
+                <li><button id="APCap3" onclick="addP(3)">capítulo 3</button></li>
+                <li><button id="APCap4" onclick="addP(4)">capítulo 4</button></li>
+                <li><button id="APCap5" onclick="addP(5)">capítulo 5</button></li>
+                <li><button id="APCap6" onclick="addP(6)">capítulo 6</button></li>
+                <li><button id="APCap7" onclick="addP(7)">capítulo 7</button></li>
+                <li><button id="APCap8" onclick="addP(8)">capítulo 8</button></li>
+                <li><button id="APCap9" onclick="addP(9)">capítulo 9</button></li>
+            </ul>
+        </details>
+        <details>
+            <summary>eliminar personaje</summary>
+            <ul>
+                <li><button id="EPCap1" onclick="delP(1)">capítulo 1</button></li>
+                <li><button id="EPCap2" onclick="delP(2)">capítulo 2</button></li>
+                <li><button id="EPCap3" onclick="delP(3)">capítulo 3</button></li>
+                <li><button id="EPCap4" onclick="delP(4)">capítulo 4</button></li>
+                <li><button id="EPCap5" onclick="delP(5)">capítulo 5</button></li>
+                <li><button id="EPCap6" onclick="delP(6)">capítulo 6</button></li>
+                <li><button id="EPCap7" onclick="delP(7)">capítulo 7</button></li>
+                <li><button id="EPCap8" onclick="delP(8)">capítulo 8</button></li>
+                <li><button id="EPCap9" onclick="delP(9)">capítulo 9</button></li>
+            </ul>
+        </details>
+    </nav>
+    <main id="content" style="flex:3; display: flex; justify-content: center; flex-direction: column; align-items: center;">
+    </main>
+    
+</body>
+</html>
+
+
+<script>
+
+function selectEpisode(num){
+    switch(num){
+        case 1:
+            return "I";
+            break;
+        case 2:
+            return "II";
+            break;
+        case 3:
+            return "III";
+            break;
+        case 4: 
+            return "IV";
+            break;
+        case 5:
+            return "V";
+            break;
+        case 6:
+            return "VI";
+            break;
+        case 7:
+            return "VII";
+            break;
+        case 8: 
+            return "VIII";
+            break;
+        case 9: 
+            return "IX";
+            break;
+        }
+}
+
+    function listP(id){
+        let episode = selectEpisode(id);
+
+        fetch(`http://localhost:5000/episodio/${episode}/personajes`)
+        .then(response => response.json())
+        .then(data => {
+            let htmlContent = "<ul>";
+                console.log(data)
+            if(typeof data !== "string"){
+                data.forEach(element => {
+                htmlContent = htmlContent + `<li>${element}</li>`
+                });
+            }else htmlContent = htmlContent + "<li>sin personajes</li>" 
+                
+            
+            htmlContent = htmlContent + `</ul>`
+            document.getElementById("content").innerHTML = htmlContent;
+        });
+    }
+
+    function addP(id){
+        let episode = selectEpisode(id);
+        let htmlContent =`<div>Agregar un nuevo personaje al capítulo ${episode}</div>\n`+
+        '<input type="text" name="" id="personaje">'+
+        `<button id="sendP" onclick="sendAddP('${episode}')">enviar</button>`;
+        document.getElementById("content").innerHTML = htmlContent;
+
+    }
+
+    function sendAddP(episode){
+        let name = document.getElementById("personaje").value;
+        let obj = {
+            "episodio": episode,
+            "personaje": name
+        }
+        sendData = JSON.stringify(obj)
+        console.log(sendData)
+        fetch(`http://localhost:5000/personaje/nuevo`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(response => {
+            if(response.status >= 200 && response.status < 300)
+                document.getElementById("content").innerHTML = "<p style='color:green'>cargado ✅</p>";
+            if(response.status >= 400)
+                document.getElementById("content").innerHTML = "<p><span style='color:red; font-weight: bold '>ERROR</span>, no pudo cargarse el dato ❌</p>";
+        })
+        
+    }
+
+    function delP(id){
+        let episode = selectEpisode(id);
+        let htmlContent =`<div>Eliminar personaje del capítulo ${episode}</div>\n`+
+        '<input type="text" name="" id="personaje">'+
+        `<button id="sendP" onclick="sendDelP('${episode}')">enviar</button>`;
+        document.getElementById("content").innerHTML = htmlContent;
+    }
+
+    function sendDelP(episode){
+        let name = document.getElementById("personaje").value;
+        let obj = {
+            "episodio": episode,
+            "personaje": name
+        }
+        sendData = JSON.stringify(obj)
+        console.log(sendData)
+        fetch(`http://localhost:5000/personaje/quitar`, {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+        .then(response => {
+            if(response.status == 200)
+                document.getElementById("content").innerHTML = "<p style='color:green'>cargado ✅</p>";
+            if(response.status >= 400)
+                document.getElementById("content").innerHTML = "<p><span style='color:red; font-weight: bold '>ERROR</span>, no pudo cargarse el dato ❌</p>";
+        })
+        
+    }
+</script>
